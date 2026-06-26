@@ -69,14 +69,15 @@ export default function ItemModal({ item, onClose, currencySymbol = '$' }: ItemM
             className="fixed inset-0 z-40 bg-black/70 backdrop-blur-md"
           />
 
-          {/* Modal — split panel */}
+          {/* Modal wrapper — centers the panel and handles positioning */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 pointer-events-none">
           <motion.div
             key="modal"
             initial={{ opacity: 0, y: 40, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.96 }}
             transition={{ type: 'spring', stiffness: 280, damping: 26 }}
-            className="fixed inset-x-3 top-[50%] -translate-y-[50%] z-50 max-w-3xl mx-auto bg-surface rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[92vh]"
+            className="pointer-events-auto w-full max-w-3xl bg-surface rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[92vh] min-h-0"
           >
             {/* ── Left: Image preview ──────────────────────────────────── */}
             <div className="relative shrink-0 md:w-[46%] h-40 sm:h-52 md:h-auto bg-background">
@@ -109,7 +110,7 @@ export default function ItemModal({ item, onClose, currencySymbol = '$' }: ItemM
               </div>
 
               {/* Scrollable content */}
-              <div className="overflow-y-auto flex-1 px-5 pt-4 pb-2 md:pt-2 space-y-4">
+              <div className="overflow-y-auto overscroll-contain flex-1 min-h-0 px-5 pt-4 pb-2 md:pt-2 space-y-4">
                 {/* Tags */}
                 {item.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1">
@@ -204,6 +205,7 @@ export default function ItemModal({ item, onClose, currencySymbol = '$' }: ItemM
               </div>
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>

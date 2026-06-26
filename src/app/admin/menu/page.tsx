@@ -44,7 +44,7 @@ function ItemForm({
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium text-gray-700 mb-1 block">Name *</label>
@@ -152,13 +152,13 @@ export default function AdminMenuPage() {
   }
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 sm:p-6 max-w-5xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-3xl font-display font-bold text-gray-900">Menu Editor</h1>
-          <p className="text-gray-500 mt-1">{menu.length} items · {menu.filter((i) => i.available).length} available</p>
+          <h1 className="text-2xl sm:text-3xl font-display font-bold text-gray-900">Menu Editor</h1>
+          <p className="text-gray-500 mt-1 text-sm">{menu.length} items · {menu.filter((i) => i.available).length} available</p>
         </div>
-        <Button onClick={() => { setAdding(true); setEditingId(null) }}>
+        <Button className="w-full sm:w-auto" onClick={() => { setAdding(true); setEditingId(null) }}>
           <Plus size={16} /> Add Item
         </Button>
       </div>
@@ -202,39 +202,44 @@ export default function AdminMenuPage() {
                 onCancel={() => setEditingId(null)}
               />
             ) : (
-              <div className={`bg-white rounded-2xl border border-gray-100 p-4 flex gap-4 items-center ${!item.available ? 'opacity-60' : ''}`}>
-                <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0">
-                  <Image src={item.image} alt={item.name} fill className="object-cover" />
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-semibold text-gray-900">{item.name}</span>
-                    {item.tags.slice(0, 2).map((t) => <Badge key={t} tag={t} />)}
+              <div className={`bg-white rounded-2xl border border-gray-100 p-4 flex flex-col sm:flex-row gap-4 sm:items-center ${!item.available ? 'opacity-60' : ''}`}>
+                <div className="flex gap-4 items-center flex-1 min-w-0">
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0">
+                    <Image src={item.image} alt={item.name} fill className="object-cover" />
                   </div>
-                  <p className="text-gray-400 text-xs mt-0.5 truncate">{item.description}</p>
-                  <p className="text-primary font-display font-bold mt-1">{formatPrice(item.price, config.currencySymbol)}</p>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-semibold text-gray-900">{item.name}</span>
+                      {item.tags.slice(0, 2).map((t) => <Badge key={t} tag={t} />)}
+                    </div>
+                    <p className="text-gray-400 text-xs mt-0.5 truncate">{item.description}</p>
+                    <p className="text-primary font-display font-bold mt-1">{formatPrice(item.price, config.currencySymbol)}</p>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-1 shrink-0 border-t sm:border-t-0 border-gray-100 pt-3 sm:pt-0 -mx-4 px-4 sm:mx-0 sm:px-0">
                   <button
                     onClick={() => toggleAvailability(item.id)}
-                    className={`p-2 rounded-xl transition-colors ${item.available ? 'text-green-600 hover:bg-green-50' : 'text-gray-400 hover:bg-gray-50'}`}
+                    className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 py-2 sm:p-2 rounded-xl text-sm font-medium transition-colors ${item.available ? 'text-green-600 hover:bg-green-50' : 'text-gray-400 hover:bg-gray-50'}`}
                     title={item.available ? 'Mark unavailable' : 'Mark available'}
                   >
                     {item.available ? <Eye size={16} /> : <EyeOff size={16} />}
+                    <span className="sm:hidden">{item.available ? 'Visible' : 'Hidden'}</span>
                   </button>
                   <button
                     onClick={() => { setEditingId(item.id); setAdding(false) }}
-                    className="p-2 rounded-xl text-gray-400 hover:text-primary hover:bg-primary/5 transition-colors"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 py-2 sm:p-2 rounded-xl text-sm font-medium text-gray-400 hover:text-primary hover:bg-primary/5 transition-colors"
                   >
                     <Pencil size={16} />
+                    <span className="sm:hidden">Edit</span>
                   </button>
                   <button
                     onClick={() => deleteMenuItem(item.id)}
-                    className="p-2 rounded-xl text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 py-2 sm:p-2 rounded-xl text-sm font-medium text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
                   >
                     <Trash2 size={16} />
+                    <span className="sm:hidden">Delete</span>
                   </button>
                 </div>
               </div>
