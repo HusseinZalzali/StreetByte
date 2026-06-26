@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: 247 52 46;
+  --color-secondary: 255 184 0;
+  --color-bg: 255 251 240;
+  --color-surface: 255 255 255;
+  --color-text: 26 26 26;
+  --color-text-muted: 107 114 128;
+  --color-border: 229 231 235;
+  --font-display: 'Fredoka', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-primary) / 0.3);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-primary) / 0.6);
+}
+
+/* Utility classes */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Canvas full-bleed override */
+canvas {
+  display: block;
+}
