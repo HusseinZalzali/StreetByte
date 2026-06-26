@@ -32,9 +32,10 @@ export default function ItemViewer3D({
     const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100)
     camera.position.set(0, 0, 4.5)
 
+    const el = canvas
     function resize() {
-      const w = canvas.clientWidth
-      const h = canvas.clientHeight
+      const w = el.clientWidth
+      const h = el.clientHeight
       if (w === 0 || h === 0) return
       renderer.setSize(w, h, false)
       camera.aspect = w / h

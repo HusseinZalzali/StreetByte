@@ -32,9 +32,10 @@ export default function HeroScene() {
     const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100)
     camera.position.set(0, 0, 6)
 
+    const el = canvas
     function resize() {
-      const w = canvas.clientWidth
-      const h = canvas.clientHeight
+      const w = el.clientWidth
+      const h = el.clientHeight
       renderer.setSize(w, h, false)
       camera.aspect = w / h
       camera.updateProjectionMatrix()
